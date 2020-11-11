@@ -1,7 +1,18 @@
 #include <MisakaWindowSystem.h>
+#include <iostream>
 
-int main()
+INT WINAPI Misaka::Main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT iShowCmd)
 {
-    Misaka::Window wind;
+    Misaka::Window::Configuration conf(hInstance, iShowCmd);
+    Misaka::Window* win = Misaka::Window::CreateWindowInstance(700, 400, L"Title", conf);
+
+    while (win->IsAlive())
+    {
+        win->PollEvents();
+    }
+
+    delete win;
     return 0;
 }
+
+MISAKA_RUN_APPLICATION;

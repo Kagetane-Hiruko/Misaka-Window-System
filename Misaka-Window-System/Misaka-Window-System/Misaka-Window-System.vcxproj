@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Keys.h" />
     <ClInclude Include="src\MisakaWindowSystem.h" />
   </ItemGroup>
   <ItemGroup>

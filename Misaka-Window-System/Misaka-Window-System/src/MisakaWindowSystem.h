@@ -35,6 +35,7 @@ namespace Misaka
         bool IsResized() const { return mbResized; }
         int GetWidth() const { return miWidth; }
         int GetHeight() const { return miHeight; }
+        HWND GetHandle() const { return mhWnd; }
         
         virtual ~Window();
 
@@ -72,6 +73,37 @@ namespace Misaka
 
     protected:
         explicit Keyboard();
+    };
+
+    class Mouse
+    {
+    public:
+        enum class Action { Press, Release, None };
+        
+    private:
+        friend class Window;
+        INT miButton;
+        Action meAction;
+        POINT mPoint;
+        INT miScroll;
+
+    protected:
+        static inline Mouse* mMouse;
+    public:
+        static Mouse* CreateMouseInstance();
+        static Mouse* GetInstance();
+
+        int GetScroll() const { return miScroll; }
+        int GetButton() const { return miButton; }
+        Action GetAction() const { return meAction; }
+        int GetPosX() const { return mPoint.x; }
+        int GetPosY() const { return mPoint.y; }
+
+        void ResetState();
+
+        virtual ~Mouse();
+    protected:
+        explicit Mouse();
     };
 
     INT WINAPI Main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT iShowCmd);

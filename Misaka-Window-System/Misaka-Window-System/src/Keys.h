@@ -1,5 +1,14 @@
 #pragma once
 
+#define MISAKA_BUTTON_NONE                  0x00
+#define MISAKA_BUTTON_LEFT                  0x01
+#define MISAKA_BUTTON_RIGHT                 0x02
+#define MISAKA_BUTTON_MIDDLE                0x03
+
+#define MISAKA_SCROLL_NONE                  0x00
+#define MISAKA_SCROLL_UP                    0x780000
+#define MISAKA_SCROLL_DOWN                  0xFF880000
+
 #define MISAKA_KEY_NONE                     0x00
 #define MISAKA_KEY_LBUTTON                  0x01
 #define MISAKA_KEY_RBUTTON                  0x02

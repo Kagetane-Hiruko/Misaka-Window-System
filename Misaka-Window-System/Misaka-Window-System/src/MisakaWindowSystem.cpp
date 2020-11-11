@@ -89,6 +89,7 @@ namespace Misaka
     {
         Window* win = Window::GetInstance();
         Keyboard* kbd = Keyboard::GetInstance();
+        Mouse* mus = Mouse::GetInstance();
         switch (message)
         {
         case WM_SIZE:
@@ -104,22 +105,18 @@ namespace Misaka
             return 0;
         }
         break;
-        case WM_KEYDOWN:
+        case WM_MOUSEWHEEL:
         {
-            if (kbd != NULL)
-            {
-                kbd->miKey = wParam;
-                kbd->meAction = Keyboard::Action::Press;
-                return 0;
-            }
+            mus->miScroll = wParam;
+            return 0;
         }
         break;
-        case WM_KEYUP:
+        case WM_KEYDOWN: case WM_KEYUP:
         {
             if (kbd != NULL)
             {
                 kbd->miKey = wParam;
-                kbd->meAction = Keyboard::Action::Release;
+                kbd->meAction = (message == WM_KEYDOWN) ? Keyboard::Action::Press : Keyboard::Action::Release;
                 return 0;
             }
         }
@@ -127,6 +124,28 @@ namespace Misaka
         case WM_DESTROY:
         {
             PostQuitMessage(0);
+            return 0;
+        }
+        break;        
+        case WM_LBUTTONDOWN: case WM_RBUTTONDOWN: case WM_MBUTTONDOWN:
+        {
+            if (mus != NULL)
+            {
+                mus->miButton = (message == WM_LBUTTONDOWN) ? MISAKA_BUTTON_LEFT :
+                    (message == WM_RBUTTONDOWN) ? MISAKA_BUTTON_RIGHT : MISAKA_BUTTON_MIDDLE;
+                mus->meAction = Mouse::Action::Press;
+            }
+            return 0;
+        }
+        break;
+        case WM_LBUTTONUP: case WM_RBUTTONUP: case WM_MBUTTONUP:
+        {
+            if (mus != NULL)
+            {
+                mus->miButton = (message == WM_LBUTTONUP) ? MISAKA_BUTTON_LEFT :
+                    (message == WM_RBUTTONUP) ? MISAKA_BUTTON_RIGHT : WM_MBUTTONUP;
+                mus->meAction = Mouse::Action::Release;
+            }
             return 0;
         }
         break;
@@ -175,6 +194,46 @@ namespace Misaka
     }
 
     Keyboard::~Keyboard()
+    {
+
+    }
+
+    /*------------------------------------------------------------------------
+                                    Keyboard
+    ------------------------------------------------------------------------*/
+
+    Mouse* Mouse::CreateMouseInstance()
+    {
+        if (mMouse == NULL)
+        {
+            mMouse = new Mouse();
+        }
+        return mMouse;
+    }
+
+    Mouse* Mouse::GetInstance()
+    {
+        return mMouse;
+    }
+
+    void Mouse::ResetState()
+    {
+        miButton = MISAKA_BUTTON_NONE;
+        meAction = Mouse::Action::None;
+       
+        GetCursorPos(&mPoint);
+        ScreenToClient(Window::GetInstance()->GetHandle(), &mPoint);
+
+        miScroll = MISAKA_SCROLL_NONE;
+    }
+
+    Mouse::Mouse()
+        :
+        mPoint({ 0, 0 })
+    {
+    }
+
+    Mouse::~Mouse()
     {
 
     }

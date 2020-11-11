@@ -40,6 +40,7 @@ namespace Misaka
     INT WINAPI Main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT iShowCmd);
 }
 
+#define MISAKA_QUIT_OK 0
 #define MISAKA_RUN_APPLICATION \
     int main(const int argc, const char** argv)   \
     {											  \

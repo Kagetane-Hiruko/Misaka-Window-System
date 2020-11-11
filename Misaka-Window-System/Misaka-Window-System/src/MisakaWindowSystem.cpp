@@ -43,6 +43,7 @@ namespace Misaka
 
     void Window::PollEvents()
     {
+        mbResized = FALSE;
         if (PeekMessage(&mMsg, NULL, 0, 0, PM_REMOVE))
         {
             TranslateMessage(&mMsg);
@@ -50,15 +51,6 @@ namespace Misaka
         }
     }
 
-    bool Window::IsResized()
-    {
-        if (mbResized)
-        {
-            mbResized = FALSE;
-            return TRUE;
-        }
-        return FALSE;
-    }
     Window::~Window()
     {
 
@@ -109,7 +101,6 @@ namespace Misaka
         break;
         default:
         {
-
             return DefWindowProc(hWnd, message, wParam, lParam);
         }
         }

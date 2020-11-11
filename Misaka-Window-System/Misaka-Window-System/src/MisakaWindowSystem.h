@@ -32,7 +32,7 @@ namespace Misaka
 
         bool IsAlive();
         void PollEvents();
-        bool IsResized();
+        bool IsResized() const { return mbResized; }
         int GetWidth() const { return miWidth; }
         int GetHeight() const { return miHeight; }
         

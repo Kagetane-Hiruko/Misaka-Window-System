@@ -2,7 +2,7 @@
 
 #include <windows.h>
 #include <windowsx.h>
-
+#include <gl/GL.h>
 #include "Keys.h"
 
 namespace Misaka
@@ -20,6 +20,11 @@ namespace Misaka
         HWND mhWnd;
         MSG mMsg;
 
+        int miWidth;
+        int miHeight;
+        bool mbResized;
+
+
     public:
         static inline Window* mWindow;
         static Window* CreateWindowInstance(INT iWidth, INT iHeight, LPCWSTR lpTitle, Configuration config);
@@ -27,6 +32,9 @@ namespace Misaka
 
         bool IsAlive();
         void PollEvents();
+        bool IsResized();
+        int GetWidth() const { return miWidth; }
+        int GetHeight() const { return miHeight; }
         
         virtual ~Window();
 

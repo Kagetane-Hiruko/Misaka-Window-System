@@ -10,6 +10,8 @@ INT WINAPI Misaka::Main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCm
     while (win->IsAlive())
     {
         win->PollEvents();
+        if(win->IsResized())
+            std::cout << win->GetWidth() << ":" << win->GetHeight() << std::endl;
     }
     
     delete win;

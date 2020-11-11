@@ -1,5 +1,7 @@
 #include "MisakaWindowSystem.h"
 
+#include <iostream>
+
 namespace Misaka
 {
     Window::Configuration::Configuration(HINSTANCE hInstance, INT iShowCmd)
@@ -48,12 +50,25 @@ namespace Misaka
         }
     }
 
+    bool Window::IsResized()
+    {
+        if (mbResized)
+        {
+            mbResized = FALSE;
+            return TRUE;
+        }
+        return FALSE;
+    }
     Window::~Window()
     {
 
     }
-
+   
     Window::Window(INT iWidth, INT iHeight, LPCWSTR lpTitle, Configuration config)
+        : 
+        miWidth(iWidth),
+        miHeight(iHeight),
+        mbResized(FALSE)
     {
         RegisterClassEx(&config);
         RECT winRect = { 0, 0, iWidth, iHeight };
@@ -76,12 +91,27 @@ namespace Misaka
 
     LRESULT CALLBACK Window::WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
+        Window* win = Window::GetInstance();
         switch (message)
         {
-            default:
+        case WM_SIZE:
+        {
+            if (win != NULL)
             {
-                return DefWindowProc(hWnd, message, wParam, lParam);
+                RECT winRect = { 0 };
+                GetClientRect(hWnd, &winRect);
+                win->miWidth = winRect.right;
+                win->miHeight = winRect.bottom;
+                win->mbResized = TRUE;
             }
+            return 0;
+        }
+        break;
+        default:
+        {
+
+            return DefWindowProc(hWnd, message, wParam, lParam);
+        }
         }
     }
 }

@@ -1,15 +1,13 @@
 #pragma once
 
-#define MISAKA_DIRECTX                      TRUE
-#define MISAKA_OPENGL                       FALSE
-
+#define MISAKA_KEY_NONE                     0x00
 #define MISAKA_KEY_LBUTTON                  0x01
 #define MISAKA_KEY_RBUTTON                  0x02
 #define MISAKA_KEY_CANCEL                   0x03
 #define MISAKA_KEY_MBUTTON                  0x04
 #define MISAKA_KEY_XBUTTON1                 0x05
 #define MISAKA_KEY_XBUTTON2                 0x06
-#define MISAKA_KEYDEFINED                   0x07
+#define MISAKA_KEY_UNDEFINED                0x07
 #define MISAKA_KEY_BACK                     0x08
 #define MISAKA_KEY_TAB                      0x09
 #define MISAKA_KEY_CLEAR                    0x0C

@@ -23,10 +23,10 @@ namespace Misaka
         int miWidth;
         int miHeight;
         bool mbResized;
-
+        static inline Window* mWindow;
 
     public:
-        static inline Window* mWindow;
+        
         static Window* CreateWindowInstance(INT iWidth, INT iHeight, LPCWSTR lpTitle, Configuration config);
         static Window* GetInstance();
 
@@ -43,6 +43,29 @@ namespace Misaka
         explicit Window(INT iWidth, INT iHeight, LPCWSTR lpTitle, Configuration config);
 
         static LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+    };
+
+    class Keyboard
+    {
+    private:
+        friend class Window;
+        INT miKey;
+        enum class Action { Press, Release, None } meAction;
+        
+    protected:
+        static inline Keyboard* mKeyboard;
+    
+    public:
+        static Keyboard* CreateKeyboardInstance();
+        static Keyboard* GetInstance();
+
+        bool IsKeyDown(INT iKey);
+        int GetKey() const { return miKey; }
+
+        void ResetState();
+
+    protected:
+        explicit Keyboard();
     };
 
     INT WINAPI Main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT iShowCmd);

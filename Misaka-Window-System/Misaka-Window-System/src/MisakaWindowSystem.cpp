@@ -4,6 +4,10 @@
 
 namespace Misaka
 {
+    /*------------------------------------------------------------------------
+                                      Window
+    ------------------------------------------------------------------------*/
+
     Window::Configuration::Configuration(HINSTANCE hInstance, INT iShowCmd)
     {
         ZeroMemory(this, sizeof(Window::Configuration));
@@ -84,6 +88,7 @@ namespace Misaka
     LRESULT CALLBACK Window::WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         Window* win = Window::GetInstance();
+        Keyboard* kbd = Keyboard::GetInstance();
         switch (message)
         {
         case WM_SIZE:
@@ -99,10 +104,73 @@ namespace Misaka
             return 0;
         }
         break;
+        case WM_KEYDOWN:
+        {
+            if (kbd != NULL)
+            {
+                kbd->miKey = wParam;
+                kbd->meAction = Keyboard::Action::Press;
+                return 0;
+            }
+        }
+        break;
+        case WM_KEYUP:
+        {
+            if (kbd != NULL)
+            {
+                kbd->miKey = wParam;
+                kbd->meAction = Keyboard::Action::Release;
+                return 0;
+            }
+        }
+        break;
+        case WM_DESTROY:
+        {
+            PostQuitMessage(0);
+            return 0;
+        }
+        break;
         default:
         {
             return DefWindowProc(hWnd, message, wParam, lParam);
         }
         }
+    }
+
+    /*------------------------------------------------------------------------
+                                    Keyboard
+    ------------------------------------------------------------------------*/
+    
+    Keyboard* Keyboard::CreateKeyboardInstance()
+    {
+        if (mKeyboard == NULL)
+        {
+            mKeyboard = new Keyboard();
+        }
+        return mKeyboard;
+    }
+
+    Keyboard* Keyboard::GetInstance()
+    {
+        return mKeyboard;
+    }
+
+    bool Keyboard::IsKeyDown(INT iKey)
+    {
+        return GetKeyState(iKey) & 0x8000;
+    }
+
+    void Keyboard::ResetState()
+    {
+        miKey = MISAKA_KEY_NONE;
+        meAction = Keyboard::Action::None;
+    }
+
+    Keyboard::Keyboard()
+        :
+        miKey(MISAKA_KEY_NONE),
+        meAction(Keyboard::Action::None)
+    {
+
     }
 }

@@ -47,10 +47,13 @@ namespace Misaka
 
     class Keyboard
     {
+    public:
+        enum class Action { Press, Release, None };
+   
     private:
         friend class Window;
         INT miKey;
-        enum class Action { Press, Release, None } meAction;
+        Action meAction;
         
     protected:
         static inline Keyboard* mKeyboard;
@@ -61,6 +64,7 @@ namespace Misaka
 
         bool IsKeyDown(INT iKey);
         int GetKey() const { return miKey; }
+        Action GetAction() const { return meAction; }
 
         void ResetState();
 

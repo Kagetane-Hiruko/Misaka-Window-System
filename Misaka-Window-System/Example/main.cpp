@@ -12,10 +12,7 @@ INT WINAPI Misaka::Main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCm
     {
         win->PollEvents();
 
-        if (kbd->IsKeyDown(MISAKA_KEY_A))
-            std::cout << i++ << std::endl;
-
-        if (kbd->GetKey())
+        if (kbd->GetKey() && kbd->GetAction() == Misaka::Keyboard::Action::Press)
             std::cout << kbd->GetKey() << std::endl;
 
         if(win->IsResized())

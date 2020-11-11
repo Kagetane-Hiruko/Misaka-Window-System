@@ -173,4 +173,9 @@ namespace Misaka
     {
 
     }
+
+    Keyboard::~Keyboard()
+    {
+
+    }
 }

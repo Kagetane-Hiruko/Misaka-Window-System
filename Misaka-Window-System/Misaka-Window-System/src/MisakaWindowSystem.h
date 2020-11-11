@@ -68,6 +68,8 @@ namespace Misaka
 
         void ResetState();
 
+        virtual ~Keyboard();
+
     protected:
         explicit Keyboard();
     };

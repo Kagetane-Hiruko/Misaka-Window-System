@@ -1,6 +1,4 @@
 #include <MisakaWindowSystem.h>
-#include <iostream>
-#include <chrono>
 
 INT WINAPI Misaka::Main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT iShowCmd)
 {
@@ -20,7 +18,7 @@ INT WINAPI Misaka::Main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCm
 
         if (win->IsResized())
         {
-            std::cout << win->GetWidth() << ":" << win->GetHeight() << std::endl;
+            // Window resize
         }
 
         mouse->ResetState();

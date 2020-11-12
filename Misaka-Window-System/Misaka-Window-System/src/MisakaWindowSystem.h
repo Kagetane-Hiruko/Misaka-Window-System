@@ -52,11 +52,9 @@ namespace Misaka
     public:
         enum class Action { None, Press, Release };
    
-    private:
+    protected:
         friend class Window;
         Action meActions[255];
-        
-    protected:
         static inline Keyboard* mKeyboard;
     
     public:
@@ -79,14 +77,13 @@ namespace Misaka
     public:
         enum class Action { None, Press, Release };
 
-    private:
+    protected:
         friend class Window;
 
         Action mActions[3];
         POINT mPoint;
         INT miScroll;
 
-    protected:
         static inline Mouse* mMouse;
     public:
         static Mouse* CreateMouseInstance();

@@ -5,7 +5,7 @@
 INT WINAPI Misaka::Main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT iShowCmd)
 {
     Misaka::Window::Configuration conf(hInstance, iShowCmd);
-    Misaka::Window* win = Misaka::Window::CreateWindowInstance(700, 400, L"Title", conf);
+    Misaka::Window* win = Misaka::Window::CreateWindowInstance(700, 400, L"Misaka Window", conf);
     Misaka::Keyboard* kbd = Misaka::Keyboard::CreateKeyboardInstance();
     Misaka::Mouse* mouse = Misaka::Mouse::CreateMouseInstance();
 

@@ -16,11 +16,6 @@ INT WINAPI Misaka::Main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCm
             win->Close();
         }
 
-        if (win->IsResized())
-        {
-            // Window resize
-        }
-
         mouse->ResetState();
         kbd->ResetState();
     }

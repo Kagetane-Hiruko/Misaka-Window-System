@@ -1,7 +1,7 @@
 # Misaka Window System
 Static C++ library for creating window that will be used in combination with DirectX or OpenGL projects. Also provides interface for keyboard and mouse events.
 
-> This library is still in development and will be more expanded in future.
+> This library is still in development and will be expanded in future.
 > :warning: **Not to be used in production!**
 <p align="center">
     <br>

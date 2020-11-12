@@ -18,35 +18,47 @@ Misaka window system consists for three main classes:
 <hr>
 Protected Fields:
 
-* `HWND mhWnd` - Window handle.
-* `MSG mMsg` - Message information.
-* `int miWidth` - Window width.
-* `int miheight` - Window height.
-* `bool mbResized` - Window resized.
-* `static inline Window* mWindow` - Single window instance.
+```.cpp
+HWND mhWnd;                     // Window handle.
+MSG mMsg;                       // Message information.
+
+int miWidth;                    // Window width.
+int miHeight;                   // Window height.
+bool mbResized;                 // Window resized.
+static inline Window* mWindow;  // Single window instance.
+```
 
 Public Methods:
 
-* `static Window* CreateWindowInstance(INT iWidth, INT iHeight, LPCWSTR lpTitle, Configuration config)` - Creates and returns window instance.
-* `static Window* GetInstance()` - Returns windows signle instance.
-* `bool IsAlive()` - Check if window is not destroyed.
-* `void PollEvents()` - Poll events.
-* `bool IsResized()` - Getter for window resize.
-* `int GetWidth()` - Getter for window width.
-* `int GetHeight()` - Getter for window height.
-* `HWND GetHandle()` - Getter for window handle.
-* `void Close()` - Destroy window.
-* `virtual ~Window()` - Destructor.
+```.cpp
+static Window* CreateWindowInstance(INT iWidth, INT iHeight, LPCWSTR lpTitle, Configuration config); // Creates and returns window instance.
+static Window* GetInstance();   // Returns windows signle instance.
+
+bool IsAlive();                 // Check if window is not destroyed.
+void PollEvents();              // Poll events.
+bool IsResized();               // Getter for window resize.
+int GetWidth();                 // Getter for window width.
+int GetHeight();                // Getter for window height.
+HWND GetHandle();               // Getter for window handle.
+void Close();                   // Destroy window.
+
+virtual ~Window();              // Destructor.
+```
 
 Protected Methods:
-* `explicit Window(INT iWidth, INT iHeight, LPCWSTR lpTitle, Configuration config)` - Window constructor.
-* `static LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)` - Handling window messages.
+
+```.cpp
+explicit Window() = delete;
+explicit Window(INT iWidth, INT iHeight, LPCWSTR lpTitle, Configuration config);    // Window constructor.
+
+static LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);  // Handling window messages.
+```
 
 Inline class for handling window configuration:
 ```.cpp
 struct Configuration : public WNDCLASSEX
-        {
-            INT iShowCmd;
-            explicit Configuration(HINSTANCE hInstance, INT iShowCmd);
-        };
+{
+    INT iShowCmd;   // Display cmd.
+    explicit Configuration(HINSTANCE hInstance, INT iShowCmd);
+};
 ```

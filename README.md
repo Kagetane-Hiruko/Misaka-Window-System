@@ -7,7 +7,6 @@ Static C++ library for creating window that will be used in combination with Dir
 </p>
 
 ## Structure
-<hr>
 Misaka window system consists for three main classes:
 
 * Window
@@ -15,7 +14,6 @@ Misaka window system consists for three main classes:
 * Mouse
 
 ## Window class
-<hr>
 Protected Fields:
 
 ```.cpp

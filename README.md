@@ -31,7 +31,8 @@ static inline Window* mWindow;  // Single window instance.
 Public Methods:
 
 ```.cpp
-static Window* CreateWindowInstance(INT iWidth, INT iHeight, LPCWSTR lpTitle, Configuration config); // Creates and returns window instance.
+// Creates and returns window instance.
+static Window* CreateWindowInstance(INT iWidth, INT iHeight, LPCWSTR lpTitle, Configuration config); 
 static Window* GetInstance();   // Returns windows signle instance.
 
 bool IsAlive();                 // Check if window is not destroyed.
@@ -49,9 +50,11 @@ Protected Methods:
 
 ```.cpp
 explicit Window() = delete;
-explicit Window(INT iWidth, INT iHeight, LPCWSTR lpTitle, Configuration config);    // Window constructor.
+// Window constructor.
+explicit Window(INT iWidth, INT iHeight, LPCWSTR lpTitle, Configuration config);    
 
-static LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);  // Handling window messages.
+// Handling window messages.
+static LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);  
 ```
 
 Inline class for handling window configuration:

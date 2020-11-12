@@ -36,7 +36,8 @@ namespace Misaka
         int GetWidth() const { return miWidth; }
         int GetHeight() const { return miHeight; }
         HWND GetHandle() const { return mhWnd; }
-        
+        void Close();
+
         virtual ~Window();
 
     protected:

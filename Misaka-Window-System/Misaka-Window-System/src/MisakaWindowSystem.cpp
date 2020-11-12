@@ -55,6 +55,11 @@ namespace Misaka
         }
     }
 
+    void Window::Close()
+    {
+        DestroyWindow(mhWnd);
+    }
+
     Window::~Window()
     {
 

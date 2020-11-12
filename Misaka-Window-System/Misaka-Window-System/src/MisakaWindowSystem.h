@@ -49,12 +49,11 @@ namespace Misaka
     class Keyboard
     {
     public:
-        enum class Action { Press, Release, None };
+        enum class Action { None, Press, Release };
    
     private:
         friend class Window;
-        INT miKey;
-        Action meAction;
+        Action meActions[255];
         
     protected:
         static inline Keyboard* mKeyboard;
@@ -64,8 +63,7 @@ namespace Misaka
         static Keyboard* GetInstance();
 
         bool IsKeyDown(INT iKey);
-        int GetKey() const { return miKey; }
-        Action GetAction() const { return meAction; }
+        Action GetAction(INT iKey) const { return meActions[iKey]; }
 
         void ResetState();
 
@@ -78,12 +76,12 @@ namespace Misaka
     class Mouse
     {
     public:
-        enum class Action { Press, Release, None };
-        
+        enum class Action { None, Press, Release };
+
     private:
         friend class Window;
-        INT miButton;
-        Action meAction;
+
+        Action mActions[3];
         POINT mPoint;
         INT miScroll;
 
@@ -94,10 +92,14 @@ namespace Misaka
         static Mouse* GetInstance();
 
         int GetScroll() const { return miScroll; }
-        int GetButton() const { return miButton; }
-        Action GetAction() const { return meAction; }
+
+        Action GetLeftButton() const { return mActions[0]; }
+        Action GetRightButton() const { return mActions[1]; }
+        Action GetMiddleButton() const { return mActions[1]; }
+
         int GetPosX() const { return mPoint.x; }
         int GetPosY() const { return mPoint.y; }
+        bool IsDown(INT iButton);
 
         void ResetState();
 
